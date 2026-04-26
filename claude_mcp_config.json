@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "majestic-ai": {
+      "command": "python",
+      "args": [
+        "C:\\Users\\mehul\\OneDrive\\Desktop\\MAJESTIC\\mcp_client.py",
+        "--server",
+        "http://localhost:8888"
+      ],
+      "env": {
+        "MAJESTIC_SERVER": "http://localhost:8888"
+      },
+      "timeout": 300,
+      "description": "Majestic AI v1.0 – AI-Powered Cybersecurity Automation Platform. Exposes 150+ security tools via MCP for autonomous bug bounty, CTF solving, exploit generation, and vulnerability analysis.",
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Majestic AI",
+        "capabilities": [
+          "execute_command", "analyze_target", "select_tools",
+          "create_attack_chain", "smart_scan", "start_bug_bounty",
+          "ctf_solve", "generate_exploit", "browser_full_analysis",
+          "cve_lookup", "correlate_vulnerabilities", "nmap", "sqlmap",
+          "nuclei", "ffuf", "subfinder", "amass", "metasploit"
+        ]
+      }
+    }
+  }
+}

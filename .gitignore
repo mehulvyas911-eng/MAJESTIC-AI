@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Logs
+hexstrike.log
+*.log
+
+# Temp files / output
+/tmp/
+hexstrike_files/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets (never commit these)
+.env
+*.pem
+*.key
+secrets.json
+
+# Selenium / ChromeDriver cache
+.wdm/
+chromedriver*
