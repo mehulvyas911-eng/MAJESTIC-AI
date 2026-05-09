@@ -96,6 +96,7 @@ def severity_card(title: str, severity: str, detail: str) -> str:
     return box
 
 def tabular(headers: list, rows: list) -> str:
+    if not headers or not rows: return ""
     widths = [max(len(str(h)), max((len(str(r[i])) for r in rows), default=0))
               for i, h in enumerate(headers)]
     sep  = BLOOD_RED + "├" + "┼".join("─"*(w+2) for w in widths) + "┤" + RESET
