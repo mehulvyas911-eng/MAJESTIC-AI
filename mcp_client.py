@@ -10,7 +10,7 @@ import requests
 parser = argparse.ArgumentParser()
 parser.add_argument("--server", default=os.environ.get("MAJESTIC_SERVER","http://localhost:8888"))
 args, _ = parser.parse_known_args()
-SERVER  = args.server.rstrip("/")
+BASE_URL  = args.server.rstrip("/")
 
 try:
     from mcp.server.fastmcp import FastMCP
@@ -23,17 +23,18 @@ mcp = FastMCP("Majestic AI v1.0")
 # ── Helper ────────────────────────────────────────────────────────────────────
 def _post(endpoint: str, payload: dict) -> dict:
     try:
-        r = requests.post(f"{SERVER}{endpoint}", json=payload, timeout=300)
+        r = requests.post(f"{BASE_URL}{endpoint}", json=payload, timeout=300)
         return r.json()
     except Exception as e:
         return {"status":"error","message":str(e)}
 
 def _get(endpoint: str, params: dict = None) -> dict:
     try:
-        r = requests.get(f"{SERVER}{endpoint}", params=params, timeout=60)
+        r = requests.get(f"{BASE_URL}/{endpoint}", params=params, timeout=30)
+        r.raise_for_status()
         return r.json()
     except Exception as e:
-        return {"status":"error","message":str(e)}
+        return {"status": "error", "message": str(e)}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CORE TOOLS
@@ -284,7 +285,7 @@ def list_files() -> dict:
 def delete_file(filename: str) -> dict:
     """Delete a file from /tmp/hexstrike_files."""
     try:
-        r = requests.delete(f"{SERVER}/files/{filename}", timeout=30)
+        r = requests.delete(f"{BASE_URL}/files/{filename}", timeout=30)
         return r.json()
     except Exception as e:
         return {"status":"error","message":str(e)}
@@ -326,5 +327,5 @@ def list_all_tools() -> dict:
 # ENTRY POINT
 # ═══════════════════════════════════════════════════════════════════════════════
 if __name__ == "__main__":
-    print(f"🔴 Majestic AI v1.0 MCP Server starting → {SERVER}", file=sys.stderr)
+    print(f"🔴 Majestic AI v1.0 MCP Server starting → {BASE_URL}", file=sys.stderr)
     mcp.run(transport="stdio")
