@@ -96,10 +96,10 @@ class HeadlessBrowserAgent:
         except Exception as e:
             return [{"error": str(e)}]
 
-    def detect_missing_headers(self, url: str) -> dict:
+    def detect_missing_headers(self, url: str, verify: bool = True) -> dict:
         import requests
         try:
-            r = requests.get(url, timeout=15, verify=False)
+            r = requests.get(url, timeout=15, verify=verify)
             present = {h: r.headers.get(h) for h in SECURITY_HEADERS if h in r.headers}
             missing = [h for h in SECURITY_HEADERS if h not in r.headers]
             return {
@@ -112,12 +112,12 @@ class HeadlessBrowserAgent:
         except Exception as e:
             return {"url": url, "error": str(e)}
 
-    def full_analysis(self, url: str) -> dict:
+    def full_analysis(self, url: str, verify: bool = True) -> dict:
         nav    = self.navigate(url)
         dom    = self.extract_dom()
         shot   = self.screenshot()
         cook   = self.get_cookies()
-        hdrs   = self.detect_missing_headers(url)
+        hdrs   = self.detect_missing_headers(url, verify=verify)
         return {
             "navigation":       nav,
             "dom":              dom,
