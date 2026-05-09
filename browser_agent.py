@@ -3,7 +3,6 @@ Majestic AI v1.0 – Headless Browser Agent
 Selenium + ChromeDriver: navigate, screenshot, DOM extraction, cookies, security headers.
 """
 import logging
-import base64
 from typing import Optional
 
 logger = logging.getLogger("majestic.browser")
