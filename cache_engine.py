@@ -13,6 +13,8 @@ class TTLLRUCache:
         self.ttl      = ttl
         self._store   = OrderedDict()   # key -> (value, expire_at)
         self._lock    = threading.RLock()
+        self._cached_expired = 0
+        self._last_stats_time = 0
         # Background cleanup thread
         self._cleaner = threading.Thread(target=self._cleanup_loop, daemon=True)
         self._cleaner.start()
@@ -50,11 +52,19 @@ class TTLLRUCache:
     def stats(self):
         with self._lock:
             now = time.time()
-            live = sum(1 for _, (_, e) in self._store.items() if e > now)
+
+            # Rate limit the O(N) calculation to at most once per 5 seconds
+            if now - self._last_stats_time > 5.0:
+                self._cached_expired = sum(1 for _, (_, e) in self._store.items() if e <= now)
+                self._last_stats_time = now
+
+            total = len(self._store)
+            expired = min(self._cached_expired, total)
+            live = total - expired
             return {
-                "total_entries": len(self._store),
+                "total_entries": total,
                 "live_entries":  live,
-                "expired":       len(self._store) - live,
+                "expired":       expired,
                 "max_size":      self.max_size,
                 "ttl_seconds":   self.ttl,
             }
@@ -68,6 +78,10 @@ class TTLLRUCache:
                 dead = [k for k, (_, e) in self._store.items() if e <= now]
                 for k in dead:
                     del self._store[k]
+
+                # Reset cached stats since we just deleted all expired items
+                self._cached_expired = 0
+                self._last_stats_time = time.time()
 
 
 # ─── Active Process Registry ────────────────────────────────────────────────
