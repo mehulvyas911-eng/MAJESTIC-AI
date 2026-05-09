@@ -60,7 +60,7 @@ def execute_command_async(command: str) -> dict:
 @mcp.tool()
 def list_processes() -> dict:
     """List all registered background processes."""
-    return _get("/processes")
+    return _get("sys/processes")
 
 @mcp.tool()
 def process_status(pid: int) -> dict:
