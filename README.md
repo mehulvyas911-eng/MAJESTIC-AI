@@ -15,7 +15,7 @@
 AI Agent (Claude/GPT/Copilot)
         │  MCP Protocol
         ▼
-  mcp_client.py          ← FastMCP wrapper (50+ tool definitions)
+  mcp_client.py          ← FastMCP wrapper (150+ tool definitions)
         │  HTTP/REST
         ▼
    server.py             ← Flask API (0.0.0.0:8888)
@@ -62,7 +62,7 @@ Copy `claude_mcp_config.json` contents into:
 
 ---
 
-## API Endpoints (50+)
+## API Endpoints (150+)
 
 | Category | Endpoints |
 |---|---|
@@ -75,7 +75,7 @@ Copy `claude_mcp_config.json` contents into:
 | Bug Bounty | `POST /bugbounty/start`, `phase-commands`, `full-recon` |
 | CTF | `POST /ctf/solve`, `ctf/full-solve`, `GET /ctf/categories` |
 | Browser | `POST /browser/navigate|screenshot|extract-dom|cookies|security-headers|full-analysis` |
-| Tools | `POST /tools/{tool_name}` (55+ tools) |
+| Tools | `POST /tools/{tool_name}` (150+ tools) |
 | Files | `POST /files/write`, `GET /files/read/{name}`, `GET /files/list`, `DELETE /files/{name}` |
 | Visual | `POST /visual/progress|severity-card|table` |
 | Telemetry | `GET /cache/stats`, `GET /telemetry/performance|errors|failures` |

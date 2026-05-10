@@ -253,13 +253,30 @@ def _tool_fn(tool_name):
     fn.__doc__  = f"Run {tool_name} against a target. Provide target and optional flags."
     return fn
 
-for _t in ["nmap","masscan","rustscan","nikto","sqlmap","ffuf","nuclei","subfinder",
-           "amass","httpx","katana","gau","waybackurls","dirsearch","paramspider","arjun",
-           "x8","hydra","hashcat","john","wpscan","enum4linux","smbmap","crackmapexec",
-           "searchsploit","checksec","binwalk","strings","ropgadget","volatility",
-           "exiftool","steghide","zsteg","theHarvester","whois","dig","dnsx",
-           "assetfinder","commix","xsser","wfuzz","gobuster","feroxbuster",
-           "curl","wget","openssl","netcat","tcpdump","medusa","wireshark"]:
+for _t in [
+    "nmap", "masscan", "rustscan", "nikto", "sqlmap", "ffuf", "nuclei", "subfinder", "amass",
+    "httpx", "katana", "gau", "waybackurls", "dirsearch", "paramspider", "arjun", "x8", "hydra",
+    "hashcat", "john", "wpscan", "enum4linux", "smbmap", "crackmapexec", "searchsploit",
+    "checksec", "binwalk", "strings", "ropgadget", "volatility", "exiftool", "steghide", "zsteg",
+    "theHarvester", "whois", "dig", "dnsx", "assetfinder", "commix", "xsser", "wfuzz", "gobuster",
+    "feroxbuster", "curl", "wget", "openssl", "netcat", "tcpdump", "medusa", "wireshark", "hping3",
+    "scapy", "zmap", "arp-scan", "sslscan", "testssl", "ike-scan", "snmpwalk", "smbclient",
+    "responder", "mitmproxy", "socat", "proxychains", "bettercap", "aircrack-ng", "wash", "reaver",
+    "sniffglue", "kismet", "macchanger", "ncat", "fping", "arping", "tcptraceroute", "ip", "zap",
+    "w3af", "skipfish", "arachni", "dirb", "dalfox", "xsstrike", "kxss", "qsreplace", "httprobe",
+    "unfurl", "hakrawler", "aquatone", "eyewitness", "gowitness", "tplmap", "corsy", "blazy",
+    "jaeles", "dsss", "sqliv", "nosqlmap", "jwt_tool", "pwnxss", "whatweb", "wafw00f",
+    "wappalyzer", "pacu", "scoutsuite", "cloudsplaining", "cloudsploit", "prowler", "kube-hunter",
+    "kube-bench", "awscli", "azure-cli", "gcloud", "s3scanner", "cloudbrute", "trufflehog",
+    "gitleaks", "gitrob", "shhgit", "aws-vault", "awspx", "endoflife", "ccscanner", "gdb",
+    "radare2", "ghidra", "ida", "objdump", "ltrace", "strace", "hexdump", "xxd", "readelf", "nm",
+    "patchelf", "ldd", "gcore", "upx", "apktool", "dex2jar", "jadx", "smali", "baksmali", "c_filt",
+    "cyberchef", "base64", "rot13", "rsa_tool", "yafu", "z3", "angr", "pwntools", "foremost",
+    "scalpel", "autopsy", "dumpit", "winpmem", "testdisk", "photorec", "pngcheck", "outguess",
+    "pdfcrack", "fcrackzip", "johntheripper", "recon-ng", "maltego", "spiderfoot", "certspotter",
+    "censys", "zoomeye", "fofa", "intelx", "namechk", "sherlock", "twint", "instaloader", "holehe",
+    "phoneinfoga", "metagoofil", "amass-intel", "dnsdumpster", "crtsh", "shodan-cli", "snusbase"
+]:
     mcp.tool()(_tool_fn(_t))
 
 # ═══════════════════════════════════════════════════════════════════════════════
