@@ -501,7 +501,9 @@ def file_delete(filename):
 @app.post("/visual/progress")
 def visual_progress():
     b = request.json or {}
-    bar = progress_bar(b.get("percent", 50), b.get("width", 40), b.get("label",""))
+    # Convert old percentage (0-100) to float fraction (0.0-1.0)
+    pct = b.get("percent", 50) / 100.0
+    bar = progress_bar(pct, b.get("width", 40), b.get("label",""))
     return ok({"progress_bar": bar})
 
 @app.post("/visual/severity-card")

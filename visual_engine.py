@@ -50,10 +50,13 @@ def print_banner():
     print(BANNER)
 
 def progress_bar(pct: float, width: int = 40, label: str = "") -> str:
-    filled = int(width * pct / 100)
-    bar    = "#" * filled + "." * (width - filled)
-    colour = GREEN if pct >= 75 else (ORANGE if pct >= 40 else HACKER_RED)
-    return f"{colour}[{bar}]{RESET} {BOLD}{pct:5.1f}%{RESET} {GRAY}{label}{RESET}"
+    """Return a stylised ASCII progress bar."""
+    pct = max(0.0, min(1.0, pct))
+    filled = int(width * pct)
+    empty  = width - filled
+    bar    = (bg256(196) + " " * filled + RESET +
+              bg256(236) + " " * empty + RESET)
+    return f"[{bar}] {BOLD}{pct*100:5.1f}%{RESET} {GRAY}{label}{RESET}"
 
 BRAILLE_FRAMES = ["||","/|","//","|/","||","\\\\","\\\\","|\\\\"]
 
