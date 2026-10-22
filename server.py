@@ -2,7 +2,7 @@
 Majestic AI v1.0 – Flask REST API Server (Part 1: core + intelligence routes)
 Run: python server.py [--port PORT] [--debug]
 """
-import os, sys, time, subprocess, threading, argparse, logging, json, shutil, uuid
+import os, sys, time, subprocess, threading, argparse, logging, json, shutil, uuid, shlex
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -86,7 +86,10 @@ def run_cmd(cmd: str, timeout: int = 60) -> dict:
         return {**cached, "cached": True}
     t0 = time.time()
     try:
-        result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=timeout)
+        args_list = shlex.split(cmd)
+        if not args_list:
+            return {"command":cmd,"error":"Empty command after parsing"}
+        result = subprocess.run(args_list, shell=False, capture_output=True, text=True, timeout=timeout)
         data = {
             "command":   cmd,
             "stdout":    result.stdout,
@@ -141,7 +144,10 @@ def execute_stream():
     cmd  = body.get("command","")
     if not cmd:
         return err("'command' is required")
-    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
+    args_list = shlex.split(cmd)
+    if not args_list:
+        return err("Empty command after parsing")
+    proc = subprocess.Popen(args_list, shell=False, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT, text=True)
     pid  = proc.pid
     procs.register(pid, {"command":cmd,"status":"running","started_at":time.time()})
