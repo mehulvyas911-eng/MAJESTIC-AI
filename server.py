@@ -485,8 +485,8 @@ def file_read(filename):
 
 @app.get("/files/list")
 def file_list():
-    files = [{"name":f.name,"size":f.stat().st_size,"modified":f.stat().st_mtime}
-             for f in FILE_DIR.iterdir() if f.is_file()]
+    files = [{"name": e.name, "size": (st := e.stat()).st_size, "modified": st.st_mtime}
+             for e in os.scandir(FILE_DIR) if e.is_file()]
     return ok({"files": files, "count": len(files)})
 
 @app.delete("/files/<filename>")
