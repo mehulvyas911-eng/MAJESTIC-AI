@@ -2,7 +2,7 @@
 Majestic AI v1.0 – Flask REST API Server (Part 1: core + intelligence routes)
 Run: python server.py [--port PORT] [--debug]
 """
-import os, sys, time, subprocess, threading, argparse, logging, json, shutil, uuid
+import os, sys, time, subprocess, threading, argparse, logging
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
