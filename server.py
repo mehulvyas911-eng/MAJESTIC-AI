@@ -361,17 +361,19 @@ def browser_cookies():
 def browser_security_headers():
     b   = request.json or {}
     url = b.get("url","")
+    verify = b.get("verify", True)
     if not url:
         return err("'url' is required")
-    return ok(browser.detect_missing_headers(url))
+    return ok(browser.detect_missing_headers(url, verify=verify))
 
 @app.post("/browser/full-analysis")
 def browser_full_analysis():
     b   = request.json or {}
     url = b.get("url","")
+    verify = b.get("verify", True)
     if not url:
         return err("'url' is required")
-    return ok(browser.full_analysis(url))
+    return ok(browser.full_analysis(url, verify=verify))
 
 # ── Tool-specific endpoints (major tools) ─────────────────────────────────────
 TOOL_COMMANDS = {
