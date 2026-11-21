@@ -4,7 +4,7 @@ Run: python server.py [--port PORT] [--debug]
 """
 import os, sys, time, subprocess, threading, argparse, logging, json, shutil, uuid
 from pathlib import Path
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 # ── Local modules ───────────────────────────────────────────────────────────
@@ -47,6 +47,25 @@ logger = logging.getLogger("majestic")
 # ── Flask app ───────────────────────────────────────────────────────────────
 app = Flask(__name__)
 CORS(app)
+GAME_DIR = Path(__file__).resolve().parent / "game"
+
+@app.get("/game")
+@app.get("/game/")
+def game_index():
+    return send_from_directory(GAME_DIR, "index.html")
+
+@app.get("/game/<path:asset>")
+def game_asset(asset):
+    return send_from_directory(GAME_DIR, asset)
+
+@app.get("/manus-routes.json")
+def manus_routes():
+    return jsonify({"routes":[{"path":"/","title":"MAJESTIC AI API"},{"path":"/game","title":"MAJESTIC Threat Triage"}]})
+
+@app.post("/game/leads")
+def game_leads_placeholder():
+    """Explicit integration point for an approved campaign lead provider."""
+    return err("Lead storage is not configured. Connect an approved provider before launch.", 501)
 
 # ── Agent singletons ─────────────────────────────────────────────────────────
 ide         = IntelligentDecisionEngine()

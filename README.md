@@ -147,3 +147,12 @@ Copy `claude_mcp_config.json` contents into:
 ---
 
 > ⚠️ **Legal Notice:** For authorized security testing, bug bounty programs, and CTF competitions only.
+
+
+## Campaign mini-game
+
+The repository now includes a mobile-friendly **MAJESTIC // THREAT TRIAGE** campaign experience at `GET /game`. It is a three-round touch game: players identify `CRITICAL` indicators, build a score, and receive immediate feedback before a results screen shows their field rank and next move.
+
+Run the API as usual with `python server.py --port 8888`, then open `http://localhost:8888/game`. The game is static and does not require a database, account, or additional dependencies. The existing API root and routes remain unchanged.
+
+The reward is intentionally marked `REWARD_CODE_PLACEHOLDER` because no campaign code or destination link was supplied. Replace it in `game/index.html` with the approved code or link. The optional email form is demo-only: consented entries are stored in the browser's `localStorage` under `majestic_demo_leads`. Before launch, connect the form to an approved lead provider, replace the privacy-policy placeholder, and update the consent wording. The `POST /game/leads` route currently returns `501` as an explicit reminder that no production lead storage is configured.

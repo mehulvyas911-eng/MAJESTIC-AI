@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090a0e" />
+  <meta name="description" content="MAJESTIC Threat Triage — a quick cybersecurity signal challenge." />
+  <title>MAJESTIC // THREAT TRIAGE</title>
+  <link rel="stylesheet" href="/game/styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <main class="app-shell">
+    <div class="brand-bar"><span class="brand-mark">MAJESTIC<span class="brand-dot">.</span>AI</span><span class="brand-status"><i></i> SYSTEM ONLINE</span></div>
+
+    <section id="welcomeScreen" class="screen screen-welcome" aria-labelledby="welcomeTitle">
+      <div class="hero-orbit" aria-hidden="true"><span class="orbit-ring ring-one"></span><span class="orbit-ring ring-two"></span><span class="orbit-core">M</span><span class="orbit-node node-one">!</span><span class="orbit-node node-two">01</span><span class="orbit-node node-three">AI</span></div>
+      <p class="eyebrow">SECURITY OPERATIONS // LIVE SIMULATION</p>
+      <h1 id="welcomeTitle">Triage the<br /><em>unknown.</em></h1>
+      <p class="lede">Tap the suspicious signals before the window closes. Three rounds. One clean sweep.</p>
+      <div class="brief-card"><span class="brief-label">MISSION BRIEF</span><span>Identify the red-flag indicators. Ignore the noise. Move fast.</span></div>
+      <button id="playButton" class="primary-button" type="button">Play now <span>↗</span></button>
+      <p class="microcopy">20 SEC // 3 ROUNDS // TOUCH READY</p>
+    </section>
+
+    <section id="gameScreen" class="screen screen-game" hidden aria-labelledby="gameTitle">
+      <div class="game-heading"><div><p class="eyebrow">ACTIVE INCIDENT // <span id="roundLabel">ROUND 01/03</span></p><h2 id="gameTitle">Threat triage</h2></div><div class="live-pill"><i></i> LIVE</div></div>
+      <div class="stats-row" aria-live="polite"><div><span>SCORE</span><strong id="scoreValue">0000</strong></div><div><span>COMBO</span><strong id="comboValue">x0</strong></div><div><span>TARGETS</span><strong id="targetValue">0/0</strong></div></div>
+      <div class="timer-wrap"><div class="timer-meta"><span>WINDOW</span><span id="timerValue">20.0s</span></div><div class="timer-track"><div id="timerBar" class="timer-bar"></div></div></div>
+      <p id="instruction" class="instruction">Find the indicators tagged <b>CRITICAL</b>.</p>
+      <div id="signalGrid" class="signal-grid" role="group" aria-label="Threat indicators"></div>
+      <div id="feedback" class="feedback" aria-live="assertive">Awaiting input…</div>
+    </section>
+
+    <section id="resultsScreen" class="screen screen-results" hidden aria-labelledby="resultsTitle">
+      <p class="eyebrow">INCIDENT CLOSED // REPORT READY</p><div class="result-icon">✓</div><h2 id="resultsTitle">Triage complete.</h2><p id="resultSummary" class="lede">You kept the signal clean.</p>
+      <div class="score-panel"><span>FINAL SIGNAL SCORE</span><strong id="finalScore">0000</strong><div id="rankValue" class="rank-badge">FIELD RANK // —</div></div>
+      <div class="reward-card"><span class="brief-label">YOUR NEXT MOVE</span><strong>Unlock your MAJESTIC field reward</strong><code id="rewardCode">REWARD_CODE_PLACEHOLDER</code><p>Replace this placeholder with your approved reward code or campaign link before launch.</p></div>
+      <form id="signupForm" class="signup-card"><div><span class="brief-label">OPTIONAL // SIGNAL DROP</span><strong>Send the mission debrief to your inbox.</strong></div><label class="email-label" for="emailInput">Work email</label><input id="emailInput" type="email" placeholder="you@company.com" autocomplete="email" /><label class="consent"><input id="consentInput" type="checkbox" /><span>I agree to receive the MAJESTIC campaign follow-up. <u>Privacy policy placeholder</u>.</span></label><button class="secondary-button" type="submit">Save my result <span>↗</span></button><p id="signupNote" class="form-note">Demo mode: consented entries are stored only in this browser until a lead provider is connected.</p></form>
+      <button id="againButton" class="text-button" type="button">↻ Play again</button>
+    </section>
+    <footer><span>MAJESTIC AI // AUTHORIZED SIMULATION</span><span>v1.0</span></footer>
+  </main>
+  <script src="/game/game.js"></script>
+</body>
+</html>
